@@ -6,11 +6,12 @@ from pydantic import BaseModel
 class Base(BaseModel):
     quiz_id: int
     user_id: str
+    name: str
 
-
-class Create(Base):
+class Create(BaseModel):
+    user_id: str
     name: str
 
 
-class Update(Base):
+class Update(BaseModel):
     name: str

@@ -22,7 +22,7 @@ class ScoreCRUD:
         scores = result.scalars().all()
         return scores
     
-    async def create_score(self, score: score_schema.Create) -> score_schema.Base:
+    async def create_score(self, score: score_schema.Create):
         db_score = ScoreModels(
             quiz_id=score.quiz_id,
             user_id=score.user_id,

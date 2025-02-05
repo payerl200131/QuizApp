@@ -18,10 +18,5 @@ class UserModels(Base):
     quizzes = relationship("QuizModels", back_populates="user")
     scores = relationship("ScoreModels", back_populates="user")
 
-    def __init__(self, username: str, password: str, birthday: datetime):
-        self.username = username
-        self.password = password
-        self.birthday = birthday
-
     def __repr__(self) -> str:
         return f"<UserModels(username={self.username}, password={self.password}, birthday={self.birthday})>"

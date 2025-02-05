@@ -29,9 +29,8 @@ class QuestionCRUD:
         questions = result.scalars().all()
         return questions
     
-    async def create_question(self, question: question_schema.Create) -> question_schema.Base:
+    async def create_question(self, question: question_schema.Create):
         db_question = QuestionModels(
-            question_id=question.question_id,
             quiz_id=question.quiz_id,
             question=question.question,
             answer=question.answer,
@@ -40,11 +39,11 @@ class QuestionCRUD:
         await self.db_session.commit()
         return db_question
     
-    async def update_question(self, question_id: int, question: str, answer: str):
+    async def update_question(self, question_id: int, quiz_id: int, question: str, answer: str):
         stmt = (
             update(QuestionModels)
             .where(QuestionModels.question_id == question_id)
-            .values(question=question, answer=answer)
+            .values(quiz_id=quiz_id, question=question, answer=answer)
         )
         stmt.execution_options(synchronize_session="fetch")
         await self.db_session.execute(stmt)

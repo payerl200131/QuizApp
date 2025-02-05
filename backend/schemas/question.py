@@ -9,10 +9,12 @@ class Base(BaseModel):
     question: str
     answer: str
 
-class Create(Base):
+class Create(BaseModel):
+    quiz_id: int
     question: str
     answer: str
 
-class Update(Base):
+class Update(BaseModel):
+    quiz_id: int
     question: str
     answer: str

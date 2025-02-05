@@ -15,12 +15,6 @@ class ScoreModels(Base):
     quizzes = relationship("QuizModels", back_populates="scores")
     user = relationship("UserModels", back_populates="scores")
 
-    def __init__(self, user_id: str, quiz_id: str, points: int, time: float):
-        self.user_id = user_id
-        self.quiz_id = quiz_id
-        self.points = points
-        self.time = time
-
     def __repr__(self) -> str:
         return f"<ScoreModels(user_id={self.user_id}, quiz_id={self.quiz_id}, points={self.points}, time={self.time})>"
     

@@ -23,9 +23,8 @@ class QuizCRUD:
         quizzes = result.scalars().all()
         return quizzes
     
-    async def create_quiz(self, quiz: quiz_schema.Create) -> quiz_schema.Base:
+    async def create_quiz(self, quiz: quiz_schema.Create):
         db_quiz = QuizModels(
-            quiz_id=quiz.quiz_id,
             user_id=quiz.user_id,
             name=quiz.name,
         )
