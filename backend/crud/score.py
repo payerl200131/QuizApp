@@ -33,7 +33,7 @@ class ScoreCRUD:
         await self.db_session.commit()
         return db_score
     
-    async def update_score(self, quiz_id: str, user_id: str, points: int, time: float):
+    async def update_score(self, quiz_id: int, user_id: str, points: int, time: float):
         stmt = (
             update(ScoreModels)
             .where(ScoreModels.quiz_id == quiz_id)
@@ -43,7 +43,7 @@ class ScoreCRUD:
         stmt.execution_options(synchronize_session="fetch")
         await self.db_session.execute(stmt)
 
-    async def delete_score(self, quiz_id: str, user_id: str):
+    async def delete_score(self, quiz_id: int, user_id: str):
         stmt = delete(ScoreModels).where(ScoreModels.quiz_id == quiz_id).where(ScoreModels.user_id == user_id)
         await self.db_session.execute(stmt)
         await self.db_session.commit()

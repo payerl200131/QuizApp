@@ -32,7 +32,7 @@ class QuizCRUD:
         await self.db_session.commit()
         return db_quiz
     
-    async def update_quiz (self, quiz_id: str, name: str):
+    async def update_quiz (self, quiz_id: int, name: str):
         stmt = (
             update(QuizModels)
             .where(QuizModels.quiz_id == quiz_id)
@@ -41,7 +41,7 @@ class QuizCRUD:
         stmt.execution_options(synchronize_session="fetch")
         await self.db_session.execute(stmt)
 
-    async def delete_quiz(self, quiz_id: str):
+    async def delete_quiz(self, quiz_id: int):
         stmt = delete(QuizModels).where(QuizModels.quiz_id == quiz_id)
         await self.db_session.execute(stmt)
         await self.db_session.commit()

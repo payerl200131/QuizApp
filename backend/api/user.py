@@ -25,7 +25,7 @@ async def register(
     return status.HTTP_201_CREATED
 
 
-@router.delete("")
+@router.delete("/{username}")
 async def delete_user(
     current_user: user_schema.Base = Depends(get_current_user),
     db: UserCRUD = Depends(get_user_crud),

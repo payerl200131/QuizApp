@@ -1,17 +1,29 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import QuizView from '../views/QuizView.vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import QuizzesView from '../views/QuizzesView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import LogoutView from '../views/LogoutView.vue'
 import RefreshView from '../views/RefreshView.vue'
+import QuizPlayView from '../views/QuizPlayView.vue'
+import QuizEditView from '../views/QuizEditView.vue'
 import { useAuthStore } from '../store/auth'
 
 const routes = [
     {
         path: '/',
         name: 'Home',
-        component: QuizView,
+        component: QuizzesView,
+    },
+    {
+        path: '/play/:id',
+        name: 'Play',
+        component: QuizPlayView,
+    },
+    {
+        path: '/create',
+        name: 'Create',
+        component: QuizEditView,
     },
     {
         path: '/register',
@@ -42,7 +54,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes, // short for `routes: routes`
 })
 

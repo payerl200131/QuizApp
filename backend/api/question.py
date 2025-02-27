@@ -14,8 +14,8 @@ async def get_questions_by_quiz(quiz_id: int, db: QuestionCRUD = Depends(get_que
 
 @router.post("", response_model=question_schema.Base)
 async def create_question(new_question: question_schema.Create, db: QuestionCRUD = Depends(get_question_crud)):
-    await db.create_question(new_question)
-    return new_question
+    created_question = await db.create_question(new_question)
+    return created_question
 
 @router.delete("")
 async def delete_question(selected_question: question_schema.Base, db: QuestionCRUD = Depends(get_question_crud)):
