@@ -12,7 +12,7 @@ export const getQuestionsByQuiz = async (quiz_id) => {
 
 export const deleteQuestion = async (id) => {
     try {
-        const response = await axios.delete("http://localhost:5001/api/questions/" + id);
+        const response = await axios.delete("http://localhost:5001/api/question/" + id);
         return response.data;
     } catch (error) {
         console.error("Error deleting question:", error);
@@ -22,7 +22,7 @@ export const deleteQuestion = async (id) => {
 
 export const updateQuestion = async (id, question) => {
     try {
-        const response = await axios.put("http://localhost:5001/api/questions/" + id, question);
+        const response = await axios.put("http://localhost:5001/api/question/" + id, question);
         return response.data;
     } catch (error) {
         console.error("Error updating question:", error);
@@ -32,7 +32,7 @@ export const updateQuestion = async (id, question) => {
 
 export const createQuestion = async (question) => {
     try {
-        const response = await axios.post("http://localhost:5001/api/questions", question);
+        const response = await axios.post("http://localhost:5001/api/question", question);
         return response.data;
     } catch (error) {
         console.error("Error creating question:", error);

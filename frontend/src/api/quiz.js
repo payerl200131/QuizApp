@@ -32,7 +32,13 @@ export const deleteQuiz = async (id) => {
 
 export const updateQuiz = async (id, quiz) => {
   try {
-    const response = await axios.put("http://localhost:5001/api/quizzes/" + id, quiz);
+    const response = await axios.put(`http://localhost:5001/api/quizzes/${id}`, {
+      name: quiz.value.name
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
     return response.data;
   } catch (error) {
     console.error("Error updating quiz:", error);

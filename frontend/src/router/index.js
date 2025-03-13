@@ -6,7 +6,8 @@ import RegisterView from '../views/RegisterView.vue'
 import LogoutView from '../views/LogoutView.vue'
 import RefreshView from '../views/RefreshView.vue'
 import QuizPlayView from '../views/QuizPlayView.vue'
-import QuizEditView from '../views/QuizEditView.vue'
+import QuizAddView from '../views/QuizAddView.vue'
+import QuizUpdateView from '../views/QuizUpdateView.vue'
 import { useAuthStore } from '../store/auth'
 
 const routes = [
@@ -21,9 +22,14 @@ const routes = [
         component: QuizPlayView,
     },
     {
+        path: '/update/:id',
+        name: 'QuizUpdate',
+        component: QuizUpdateView,
+    },
+    {
         path: '/create',
-        name: 'Create',
-        component: QuizEditView,
+        name: 'Add',
+        component: QuizAddView,
     },
     {
         path: '/register',

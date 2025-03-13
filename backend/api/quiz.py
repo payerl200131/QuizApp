@@ -28,5 +28,5 @@ async def delete_quiz(quiz_id: int, db: QuizCRUD = Depends(get_quiz_crud)):
     return await db.delete_quiz(quiz_id)
 
 @router.put("")
-async def update_quiz(request: quiz_schema.Update, selected_quiz: quiz_schema.Base, db: QuizCRUD = Depends(get_quiz_crud)):
-    return await db.update_quiz(selected_quiz.quiz_id, request.name)
+async def update_quiz(request: quiz_schema.Update, quiz_id: int, db: QuizCRUD = Depends(get_quiz_crud)):
+    return await db.update_quiz(quiz_id, request.name)

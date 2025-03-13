@@ -24,6 +24,11 @@ const createQuiz = () => {
 const updateQuiz = (quizId) => {
   window.location.href = `/update/${quizId}`;
 }
+
+const deleteQuizHandler = (quizId) => {
+  deleteQuiz(quizId);
+  window.location.reload();
+}
 </script>
 
 <template v-if="quizzes">
@@ -47,7 +52,7 @@ const updateQuiz = (quizId) => {
             <td>
               <button @click="playQuiz(quiz.quiz_id)" class="btn btn-success mx-1">Play</button>
               <button @click="updateQuiz(quiz.quiz_id)" class="btn btn-info mx-1">Update</button>
-              <button @click="deleteQuiz(quiz.quiz_id)" class="btn btn-danger mx-1">Delete</button>
+              <button @click="deleteQuizHandler(quiz.quiz_id)" class="btn btn-danger mx-1">Delete</button>
             </td>
         </tr>
       </tbody>

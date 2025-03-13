@@ -17,11 +17,10 @@ async def create_question(new_question: question_schema.Create, db: QuestionCRUD
     created_question = await db.create_question(new_question)
     return created_question
 
-@router.delete("")
-async def delete_question(selected_question: question_schema.Base, db: QuestionCRUD = Depends(get_question_crud)):
-    return await db.delete_question(selected_question.question_id)
+@router.delete("/{question_id}")
+async def delete_question(question_id: int, db: QuestionCRUD = Depends(get_question_crud)):
+    return await db.delete_question(question_id)
 
 @router.put("")
-async def update_question(request: question_schema.Update, selected_question: question_schema.Base, db: QuestionCRUD = Depends(get_question_crud)):
-    return await db.update_question(selected_question.question_id, request.question, request.answer)
-    
+async def update_question(updated: question_schema.Update, question_id: int, db: QuestionCRUD = Depends(get_question_crud)):
+    return await db.update_question(question_id, updated.quiz_id, updated.question, updated.answer)

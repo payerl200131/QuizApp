@@ -17,8 +17,8 @@ async def create_score(new_score: score_schema.Create, db: ScoreCRUD = Depends(g
     return new_score
 
 @router.delete("/{quiz_id}/{user_id}")
-async def delete_score(selected_score: score_schema.Base, db: ScoreCRUD = Depends(get_score_crud)):
-    return await db.delete_score(selected_score.quiz_id, selected_score.user_id)
+async def delete_score(quiz_id: int, user_id: str, db: ScoreCRUD = Depends(get_score_crud)):
+    return await db.delete_score(quiz_id, user_id)
 
 @router.put("")
 async def update_score(request: score_schema.Update, db: ScoreCRUD = Depends(get_score_crud)):
