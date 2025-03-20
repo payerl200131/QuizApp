@@ -17,7 +17,7 @@ onMounted(async () => {
     quiz.value = await getQuiz(id);
 
     questions.value = await getQuestionsByQuiz(id);
-    scores.value = await getScoresByQuiz(id);
+    // scores.value = await getScoresByQuiz(id);
 
   } catch (error) {
     console.error("Failed to fetch quiz:", error);
@@ -26,7 +26,7 @@ onMounted(async () => {
 
 const checkAnswer = (questionId, answer) => {
   const question = questions.value.find(q => q.question_id === questionId);
-  if (question && question.answer === answer) {
+  if (question && question.answer.replace(/\s+/g, '').toLowerCase() === answer.replace(/\s+/g, '').toLowerCase()) {
     answers.value[questionId] = true;
   }
 };
@@ -39,7 +39,7 @@ const allAnswered = computed(() => {
 
 <template>
   <div v-if="quiz" class="p-4">
-    <div class="text-center border rounded">
+    <div class="text-center border rounded p-2">
       <h3>{{ quiz.name }}</h3>
       <h5>Creator: {{ quiz.user_id }}</h5>
       <h6>Scores:</h6>
@@ -52,16 +52,17 @@ const allAnswered = computed(() => {
       Restart? <a :href="'/play/' + quiz.quiz_id">Click here</a>
     </div>
     <div v-for="question in questions" :key="question.question_id" class="mt-4">
-      <h5>{{ question.question }}</h5>
-      <div>
-        <input
-          type="input"
-          :name="question.question_id"
-          :disabled="answers[question.question_id]"
-          @input="checkAnswer(question.question_id, $event.target.value)"
-          autocomplete="off"
-        />
-      </div>
+    <label :for="question.question_id" class="h5">{{ question.question }}</label>
+    <div>
+      <input
+        type="text"
+        :id="question.question_id"
+        :disabled="answers[question.question_id]"
+        @input="event => checkAnswer(question.question_id, event.target.value)"
+        class="rounded border border-secondary"
+        autocomplete="off"
+      />
+    </div>
     </div>
   </div>
 </template>

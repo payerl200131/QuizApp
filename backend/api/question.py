@@ -6,9 +6,9 @@ from crud.question import QuestionCRUD
 from crud.dependencies import get_question_crud
 import schemas.question as question_schema
 
-router = APIRouter(prefix="/question", tags=["question"])
+router = APIRouter(prefix="/questions", tags=["questions"])
 
-@router.get("", response_model=List[question_schema.Base])
+@router.get("/{quiz_id}", response_model=List[question_schema.Base])
 async def get_questions_by_quiz(quiz_id: int, db: QuestionCRUD = Depends(get_question_crud)):
     return await db.get_questions_by_quiz(quiz_id)
 
@@ -21,6 +21,6 @@ async def create_question(new_question: question_schema.Create, db: QuestionCRUD
 async def delete_question(question_id: int, db: QuestionCRUD = Depends(get_question_crud)):
     return await db.delete_question(question_id)
 
-@router.put("")
-async def update_question(updated: question_schema.Update, question_id: int, db: QuestionCRUD = Depends(get_question_crud)):
+@router.put("/{question_id}")
+async def update_question(question_id: int, updated: question_schema.Update, db: QuestionCRUD = Depends(get_question_crud)):
     return await db.update_question(question_id, updated.quiz_id, updated.question, updated.answer)

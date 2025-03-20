@@ -31,7 +31,7 @@ const deleteQuizHandler = (quizId) => {
 }
 </script>
 
-<template v-if="quizzes">
+<template>
   <div class="d-flex justify-content-between align-items-center mt-4 ml-4 mr-4 mb-0">
     <h3>Quizzes</h3>
     <button @click="createQuiz()" class="btn btn-success">Create Quiz</button>
@@ -50,9 +50,9 @@ const deleteQuizHandler = (quizId) => {
           <td>{{ quiz.name }}</td>
           <td>{{ quiz.user_id }}</td>
             <td>
-              <button @click="playQuiz(quiz.quiz_id)" class="btn btn-success mx-1">Play</button>
-              <button @click="updateQuiz(quiz.quiz_id)" class="btn btn-info mx-1">Update</button>
-              <button @click="deleteQuizHandler(quiz.quiz_id)" class="btn btn-danger mx-1">Delete</button>
+              <button @click="playQuiz(quiz.quiz_id)" class="btn btn-success mb-1 mr-1">Play</button>
+              <button @click="updateQuiz(quiz.quiz_id)" class="btn btn-info mb-1 mr-1">Update</button>
+              <button @click="deleteQuizHandler(quiz.quiz_id)" class="btn btn-danger mb-1 mr-1">Delete</button>
             </td>
         </tr>
       </tbody>

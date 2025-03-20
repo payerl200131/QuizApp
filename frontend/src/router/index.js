@@ -27,7 +27,7 @@ const routes = [
         component: QuizUpdateView,
     },
     {
-        path: '/create',
+        path: '/create/',
         name: 'Add',
         component: QuizAddView,
     },

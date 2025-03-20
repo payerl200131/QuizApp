@@ -1,41 +1,10 @@
 import axios from "axios";
+import request from './req';
 
-export const getScoresByQuiz = async () => {
-    try {
-        const response = await axios.get("http://localhost:5001/api/scores");
-        return response.data;
-    } catch (error) {
-        console.error("Error fetching scores:", error);
-        throw error;
-    }
-} 
+export const getScoresByQuiz = async () => request('GET', '/scores').then(response => response.data);
 
-export const createScore = async () => {
-    try {
-        const response = await axios.post("http://localhost:5001/api/scores");
-        return response.data;
-    } catch (error) {
-        console.error("Error creating score:", error);
-        throw error;
-    }
-}
+export const createScore = async (score) => request('POST', '/scores', score).then(response => response.data);
 
-export const updateScore = async () => {
-    try {
-        const response = await axios.put("http://localhost:5001/api/scores");
-        return response.data;
-    } catch (error) {
-        console.error("Error updating score:", error);
-        throw error;
-    }
-}
+export const updateScore = async (id, score) => request('PUT', `/scores/${id}`, score).then(response => response.data);
 
-export const deleteScore = async () => {
-    try {
-        const response = await axios.delete("http://localhost:5001/api/scores");
-        return response.data;
-    } catch (error) {
-        console.error("Error deleting score:", error);
-        throw error;
-    }
-}
+export const deleteScore = async (id) => request('DELETE', `/scores/${id}`).then(response => response.data);

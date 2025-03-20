@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getQuiz, updateQuiz } from '../api/quiz';
+import { getQuiz, updateQuiz, createQuiz } from '../api/quiz';
 import { getQuestionsByQuiz, deleteQuestion, createQuestion, updateQuestion } from '../api/question';
 import { getScoresByQuiz } from '../api/score';
 
@@ -23,19 +23,23 @@ const deleteQuestionHandler = (question) => {
   }
 }
 
-const saveChanges = () => {
+const saveChanges = async () => {
   try {
-    updateQuiz(quiz.quiz_id, quiz.name);
+    if (quiz.value.name === '' && !quiz.value.quiz_id) {
+      await createQuiz(quiz.value);
+    } else {
+      await updateQuiz(quiz.value.quiz_id, quiz.value);
+    }
 
     for (let question of questions.value) {
       if (question.question === '' || question.answer === '') {
-        return;
+        continue;
       }
       if (!question.question_id) {
-        createQuestion(question);
-      } 
-      else {
-        updateQuestion(question);
+        const createdQuestion = await createQuestion(question);
+        question.question_id = createdQuestion.question_id;
+      } else {
+        await updateQuestion(question.question_id, question);
       }
     }
     saved.value = true;
@@ -76,8 +80,8 @@ onMounted(async () => {
           <p class="mb-0">Question {{ questions.indexOf(question) + 1 }}:</p>
           <button @click="deleteQuestionHandler(question)" class="btn btn-danger btn-sm ms-auto">Delete</button>
         </div>
-        <input class="form-control" id="answer" name="answer" type="input" placeholder="Question" v-model="question.question" />
-        <input class="form-control" id="question" name="question" type="input" placeholder="Answer" v-model="question.answer" />
+        <input class="form-control" id="answer" name="answer" type="input" placeholder="Question" autocomplete="off" v-model="question.question" />
+        <input class="form-control" id="question" name="question" type="input" placeholder="Answer" autocomplete="off" v-model="question.answer" />
       </div>
     </div>
     <div class="d-flex justify-content-between">
