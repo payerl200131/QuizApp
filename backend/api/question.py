@@ -13,14 +13,14 @@ async def get_questions_by_quiz(quiz_id: int, db: QuestionCRUD = Depends(get_que
     return await db.get_questions_by_quiz(quiz_id)
 
 @router.post("", response_model=question_schema.Base)
-async def create_question(new_question: question_schema.Create, db: QuestionCRUD = Depends(get_question_crud)):
+async def create_question(new_question: question_schema.Create, db: QuestionCRUD = Depends(get_question_crud), current_user = Depends(get_current_user)):
     created_question = await db.create_question(new_question)
     return created_question
 
 @router.delete("/{question_id}")
-async def delete_question(question_id: int, db: QuestionCRUD = Depends(get_question_crud)):
+async def delete_question(question_id: int, db: QuestionCRUD = Depends(get_question_crud), current_user = Depends(get_current_user)):
     return await db.delete_question(question_id)
 
 @router.put("/{question_id}")
-async def update_question(question_id: int, updated: question_schema.Update, db: QuestionCRUD = Depends(get_question_crud)):
+async def update_question(question_id: int, updated: question_schema.Update, db: QuestionCRUD = Depends(get_question_crud), current_user = Depends(get_current_user)):
     return await db.update_question(question_id, updated.quiz_id, updated.question, updated.answer)

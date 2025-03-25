@@ -23,10 +23,10 @@ class QuizCRUD:
         quizzes = result.scalars().all()
         return quizzes
     
-    async def create_quiz(self, quiz: quiz_schema.Create):
+    async def create_quiz(self, quiz_name, user_id):
         db_quiz = QuizModels(
-            user_id=quiz.user_id,
-            name=quiz.name,
+            name=quiz_name,
+            user_id=user_id,
         )
         self.db_session.add(db_quiz)
         await self.db_session.commit()

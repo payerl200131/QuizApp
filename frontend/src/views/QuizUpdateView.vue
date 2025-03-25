@@ -72,7 +72,7 @@ onMounted(async () => {
       <a :href="'/play/' + quiz.quiz_id">Test the quiz!</a>
     </div>
     <h6>Quiz Information:</h6>
-    <input v-if="quiz" class="form-control my-3" id="name" name="name" type="input" placeholder="Name" v-model="quiz.name" />
+    <input v-if="quiz" class="form-control my-3" id="name" name="name" type="input" placeholder="Name" autocomplete="off" v-model="quiz.name" />
     <h6>All Questions:</h6>
     <div v-for="question in questions" :key="question.id" class="">
       <div class="mt-3">

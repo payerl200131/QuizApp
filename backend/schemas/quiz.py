@@ -9,9 +9,7 @@ class Base(BaseModel):
     name: str
 
 class Create(BaseModel):
-    user_id: str
     name: str
-
 
 class Update(BaseModel):
     name: str
