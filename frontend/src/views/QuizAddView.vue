@@ -1,15 +1,15 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { createQuiz } from '../api/quiz';
 
-const quiz_name = ref(null);
+const quiz_name = ref('');
 
 const createQuizHandler = async (event) => {
   event.preventDefault();
   console.log("Test", quiz_name.value);
 
   try {
-    await createQuiz(quiz_name.value);
+    await createQuiz({ name: quiz_name.value });
     alert('Quiz created successfully!');
     quiz_name.value = '';
   } catch (error) {

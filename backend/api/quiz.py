@@ -20,8 +20,8 @@ async def get_quiz(quiz_id: int, db: QuizCRUD = Depends(get_quiz_crud)):
     return quiz
 
 @router.post("", response_model=quiz_schema.Base)
-async def create_quiz(quiz_name: str, db: QuizCRUD = Depends(get_quiz_crud), current_user = Depends(get_current_user)):
-    created_quiz = await db.create_quiz(quiz_name, current_user.username)
+async def create_quiz(quiz: quiz_schema.Create, db: QuizCRUD = Depends(get_quiz_crud), current_user = Depends(get_current_user)):
+    created_quiz = await db.create_quiz(quiz.name, current_user.username)
     return created_quiz
 
 @router.delete("/{quiz_id}")
