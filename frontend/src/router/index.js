@@ -9,6 +9,7 @@ import QuizPlayView from '../views/QuizPlayView.vue'
 import QuizAddView from '../views/QuizAddView.vue'
 import QuizUpdateView from '../views/QuizUpdateView.vue'
 import { useAuthStore } from '../store/auth'
+import UserView from '../views/UserView.vue'
 
 const routes = [
     {
@@ -25,11 +26,13 @@ const routes = [
         path: '/update/:id',
         name: 'QuizUpdate',
         component: QuizUpdateView,
+        meta: { requiresAuth: true },
     },
     {
         path: '/create/',
         name: 'Add',
         component: QuizAddView,
+        meta: { requiresAuth: true },
     },
     {
         path: '/register',
@@ -56,6 +59,11 @@ const routes = [
         path: '/refresh',
         name: 'Refresh',
         component: RefreshView,
+    },
+    {
+        path: '/users',
+        name: 'User',
+        component: UserView,
     },
 ]
 

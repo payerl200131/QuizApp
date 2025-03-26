@@ -1,8 +1,10 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { getQuizzes, deleteQuiz } from '../api/quiz';
+import { useRouter } from 'vue-router';1
 
 const quizzes = ref([]);
+const router = useRouter();
 
 onMounted(async () => {
   try {
@@ -13,16 +15,15 @@ onMounted(async () => {
 });
 
 const playQuiz = (quizId) => {
-  console.log("playQuiz", quizId);
-  window.location.href = `/play/${quizId}`;
+  router.push(`/play/${quizId}`);
 }
 
 const createQuiz = () => {
-  window.location.href = '/create';
+  router.push(`/create`);
 }
 
 const updateQuiz = (quizId) => {
-  window.location.href = `/update/${quizId}`;
+  router.push(`/update/${quizId}`);
 }
 
 const deleteQuizHandler = (quizId) => {

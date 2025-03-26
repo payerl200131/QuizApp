@@ -1,36 +1,17 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { createQuiz } from '../api/quiz';
-// import { useProfile } from '../store/me';
 
-const quiz = ref({
-  user_id: '',
-  name: ''
-});
-
-
-// TODO: don't use the user here just use the user in the backend function 
-
-// const fetchCurrentUser = async () => {
-//   try {
-//     const response = await useProfile();
-//     quiz.value.user_id = response.data.username;
-//   } catch (error) {
-//     console.error('Failed to fetch current user:', error);
-//   }
-// };
-
-// onMounted(() => {
-//   const creator = fetchCurrentUser();
-//   console.log(creator);
-// });
+const quiz_name = ref(null);
 
 const createQuizHandler = async (event) => {
   event.preventDefault();
+  console.log("Test", quiz_name.value);
+
   try {
-    await createQuiz(quiz.value);
+    await createQuiz(quiz_name.value);
     alert('Quiz created successfully!');
-    quiz.value.name = '';
+    quiz_name.value = '';
   } catch (error) {
     console.error('Failed to create quiz:', error);
     alert('Failed to create quiz.');
@@ -44,7 +25,7 @@ const createQuizHandler = async (event) => {
     <form class="m-3" @submit="createQuizHandler">
       <div class="mt-3">
         <label class="form-label" for="name">Name</label>
-        <input v-model="quiz.name" class="form-control" type="text" id="name" name="name" required>
+        <input v-model="quiz_name" class="form-control" type="text" id="name" name="name" required>
       </div>
       <div class="mt-3">
         <button type="submit" class="btn btn-primary mt-3">Submit</button>
