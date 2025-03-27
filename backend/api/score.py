@@ -8,7 +8,7 @@ import schemas.score as score_schema
 
 router = APIRouter(prefix="/scores", tags=["scores"])
 
-@router.get("", response_model=List[score_schema.Base])
+@router.get("/{quiz_id}/", response_model=List[score_schema.Base])
 async def get_scores_by_quiz(quiz_id: int, db: ScoreCRUD = Depends(get_score_crud)):
     return await db.get_scores_by_quiz(quiz_id)
 

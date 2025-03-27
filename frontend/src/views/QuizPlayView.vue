@@ -18,7 +18,7 @@ onMounted(async () => {
 
     questions.value = await getQuestionsByQuiz(id);
     scores.value = await getScoresByQuiz(id);
-    console.log(score.value);
+    console.log(scores.value);
 
   } catch (error) {
     console.error("Failed to fetch quiz:", error);
@@ -44,8 +44,8 @@ const allAnswered = computed(() => {
       <h3>{{ quiz.name }}</h3>
       <h5>Creator: {{ quiz.user_id }}</h5>
       <h6>Scores:</h6>
-      <div v-for="score in scores" :key="score.user_id">
-        <p>{{ score.user_id }}: {{ score.score }}</p>
+      <div v-for="score in scores" :key="score.user_id" class="m-0">
+        <p class="m-0">{{ score.user_id }}: {{ score.points }}</p>
       </div>
     </div>
     <div v-if="allAnswered" class="alert alert-success mt-4" role="alert">

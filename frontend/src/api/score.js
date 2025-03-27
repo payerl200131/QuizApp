@@ -1,6 +1,6 @@
 import request from './req';
 
-export const getScoresByQuiz = async () => request('GET', '/scores').then(response => response.data);
+export const getScoresByQuiz = async (quiz_id) => request('GET', `/scores/${quiz_id}`).then(response => response.data);
 
 export const createScore = async (score) => request('POST', '/scores', score).then(response => response.data);
 
