@@ -1,4 +1,3 @@
-import axios from "axios";
 import request from './req';
 
 export const getScoresByQuiz = async () => request('GET', '/scores').then(response => response.data);

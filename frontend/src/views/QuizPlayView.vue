@@ -17,7 +17,8 @@ onMounted(async () => {
     quiz.value = await getQuiz(id);
 
     questions.value = await getQuestionsByQuiz(id);
-    // scores.value = await getScoresByQuiz(id);
+    scores.value = await getScoresByQuiz(id);
+    console.log(score.value);
 
   } catch (error) {
     console.error("Failed to fetch quiz:", error);

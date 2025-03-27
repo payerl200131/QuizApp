@@ -1,4 +1,3 @@
-import axios from 'axios';
 import request from './req';
 
 export const getQuizzes = async () => request('GET', '/quizzes').then(response => response.data);

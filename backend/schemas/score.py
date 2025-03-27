@@ -9,11 +9,12 @@ class Base(BaseModel):
     points: int
     time: float
 
-class Create(Base):
+class Create(BaseModel):
+    quiz_id: int
     points: int
     time: float
 
-class Update(Base):
+class Update(BaseModel):
     user_id: str
     quiz_id: int
     points: int

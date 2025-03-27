@@ -6,8 +6,6 @@ const quiz_name = ref('');
 
 const createQuizHandler = async (event) => {
   event.preventDefault();
-  console.log("Test", quiz_name.value);
-
   try {
     await createQuiz({ name: quiz_name.value });
     alert('Quiz created successfully!');

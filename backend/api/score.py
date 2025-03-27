@@ -12,10 +12,9 @@ router = APIRouter(prefix="/scores", tags=["scores"])
 async def get_scores_by_quiz(quiz_id: int, db: ScoreCRUD = Depends(get_score_crud)):
     return await db.get_scores_by_quiz(quiz_id)
 
-@router.post("", response_model=score_schema.Base)
-async def create_score(new_score: score_schema.Create, db: ScoreCRUD = Depends(get_score_crud), current_user = Depends(get_current_user)):
-    await db.create_score(new_score)
-    return new_score
+@router.post("/")
+async def create_score(score: score_schema.Create, db: ScoreCRUD = Depends(get_score_crud), current_user=Depends(get_current_user)):
+    return await db.create_score(current_user.username, score.quiz_id, score.points, score.time)
 
 @router.delete("/{quiz_id}/{user_id}")
 async def delete_score(quiz_id: int, user_id: str, db: ScoreCRUD = Depends(get_score_crud), current_user = Depends(get_current_user)):

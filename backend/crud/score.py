@@ -1,5 +1,6 @@
 from sqlalchemy import select, update, delete
 from sqlalchemy.ext.asyncio import AsyncSession
+from typing import List
 
 from models.score import ScoreModels
 import schemas.score as score_schema
@@ -16,18 +17,18 @@ class ScoreCRUD:
         scores = result.scalars().all()
         return scores
 
-    async def get_scores_by_quiz(self, quiz_id):
+    async def get_scores_by_quiz(self, quiz_id) -> List[score_schema.Base]:
         stmt = select(ScoreModels).where(ScoreModels.quiz_id == quiz_id)
         result = await self.db_session.execute(stmt)
         scores = result.scalars().all()
         return scores
     
-    async def create_score(self, score: score_schema.Create):
+    async def create_score(self, user_id, quiz_id, points, time):
         db_score = ScoreModels(
-            quiz_id=score.quiz_id,
-            user_id=score.user_id,
-            points=score.points,
-            time=score.time
+            user_id=user_id,
+            quiz_id=quiz_id,
+            points=points,
+            time=time
         )
         self.db_session.add(db_score)
         await self.db_session.commit()
