@@ -6,7 +6,6 @@ import { getScoresByQuiz } from '../api/score';
 
 const quiz = ref(null);
 const questions = ref([]);
-const scores = ref([]);
 const saved = ref(null);
 
 const addQuestionHandler = () => {

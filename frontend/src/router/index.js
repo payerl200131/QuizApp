@@ -21,6 +21,7 @@ const routes = [
         path: '/play/:id',
         name: 'Play',
         component: QuizPlayView,
+        meta: { requiresAuth: true },
     },
     {
         path: '/update/:id',
