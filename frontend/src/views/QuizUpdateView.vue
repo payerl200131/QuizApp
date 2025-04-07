@@ -68,7 +68,7 @@ onMounted(async () => {
     <h3 class="text-center">Quiz Edit</h3>
     <div v-if="saved" class="alert alert-success mt-4" role="alert">
       Changes saved.
-      <a :href="'/play/' + quiz.quiz_id">Test the quiz!</a>
+      <a @click="$router.push('/play/' + quiz.quiz_id)" style="cursor: pointer; color: #0056B3;">Test the quiz!</a>
     </div>
     <h6>Quiz Information:</h6>
     <input v-if="quiz" class="form-control my-3" id="name" name="name" type="input" placeholder="Name" autocomplete="off" v-model="quiz.name" />
@@ -84,7 +84,7 @@ onMounted(async () => {
       </div>
     </div>
     <div class="d-flex justify-content-between">
-      <button @click="saveChanges()" class="btn btn-primary mt-3 ml-1">Save Changes</button>
+      <button @click="saveChanges()" class="btn btn-primary mt-3">Save Changes</button>
       <button @click="addQuestionHandler()" class="btn btn-success mt-3">Add Question</button>
     </div>
   </div>

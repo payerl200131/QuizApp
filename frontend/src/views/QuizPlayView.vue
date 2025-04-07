@@ -3,7 +3,6 @@ import { ref, onMounted, computed } from 'vue';
 import { getQuiz } from '../api/quiz';
 import { getQuestionsByQuiz } from '../api/question';
 import { createScore, getScoresByQuiz, updateScore, getScoresByUser } from '../api/score';
-
 const quiz = ref(null);
 const questions = ref([]);
 const answers = ref({});
@@ -19,6 +18,8 @@ onMounted(async () => {
 
     questions.value = await getQuestionsByQuiz(id);
     scores.value = await getScoresByQuiz(id);
+    scores.value.sort((a, b) => a.time - b.time);
+
     startTime.value = Date.now();
     console.log(scores.value);
   } catch (error) {
@@ -75,13 +76,12 @@ const allAnswered = computed(() => {
       <h3>{{ quiz.name }}</h3>
       <h5>Creator: {{ quiz.user_id }}</h5>
       <h6>Scores:</h6>
-      <div v-for="score in scores" :key="score.user_id" class="m-0">
-        <p class="m-0">{{ score.user_id }}: {{ score.time }}</p>
+      <div v-for="(score, index) in scores" :key="score.user_id" class="m-0">
+        <p class="m-0">{{ index + 1 }}. {{ score.user_id }}: {{ score.time }}</p>
       </div>
     </div>
     <div v-if="allAnswered" class="alert alert-success mt-4" role="alert">
       You have answered all the questions!
-      Restart? <a :href="'/play/' + quiz.quiz_id">Click here</a>
     </div>
     <div v-for="question in questions" :key="question.question_id" class="mt-4">
     <label :for="question.question_id" class="h5">{{ question.question }}</label>

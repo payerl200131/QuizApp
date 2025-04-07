@@ -6,12 +6,12 @@ from pydantic import BaseModel
 class Base(BaseModel):
     user_id: str
     quiz_id: int
-    time: float
+    time: int
 
 class Create(BaseModel):
     quiz_id: int
-    time: float
+    time: int
 
 class Update(BaseModel):
     quiz_id: int
-    time: float
+    time: int

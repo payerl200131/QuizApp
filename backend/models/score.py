@@ -9,7 +9,7 @@ class ScoreModels(Base):
     __tablename__ = "scores"
     user_id = Column(VARCHAR, ForeignKey('users.username'), primary_key=True)
     quiz_id = Column(Integer, ForeignKey('quizzes.quiz_id'), primary_key=True)
-    time = Column(Float)
+    time = Column(Integer)
 
     quizzes = relationship("QuizModels", back_populates="scores")
     user = relationship("UserModels", back_populates="scores")

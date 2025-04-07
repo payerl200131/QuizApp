@@ -49,7 +49,7 @@ async function registerUser(form){
       secondLine: "This dialog will close in 2 seconds",
     });
     setTimeout(() => {
-      router.push("/login");
+      // router.push("/login");
     },2010);
   })
   .catch((err) => {
