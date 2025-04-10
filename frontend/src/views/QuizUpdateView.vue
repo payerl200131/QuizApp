@@ -1,9 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getQuiz, updateQuiz, createQuiz } from '../api/quiz';
+import { getQuiz, updateQuiz, createQuiz, deleteQuiz } from '../api/quiz';
 import { getQuestionsByQuiz, deleteQuestion, createQuestion, updateQuestion } from '../api/question';
-import { getScoresByQuiz } from '../api/score';
 
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 const quiz = ref(null);
 const questions = ref([]);
 const saved = ref(null);
@@ -19,6 +21,17 @@ const deleteQuestionHandler = (question) => {
   } else {
     questions.value = questions.value.filter(q => q !== question);    
     deleteQuestion(question.question_id);
+  }
+}
+
+const deleteQuizHandler = async () => {
+  try {
+    if (quiz.value && quiz.value.quiz_id) {
+      await deleteQuiz(quiz.value.quiz_id);
+      router.push('/');
+    }
+  } catch (error) {
+    console.error("Failed to delete quiz:", error);
   }
 }
 
@@ -55,7 +68,6 @@ onMounted(async () => {
     quiz.value = await getQuiz(id);
 
     questions.value = await getQuestionsByQuiz(id);
-    // scores.value = await getScoresByQuiz(id);
 
   } catch (error) {
     console.error("Failed to fetch quiz:", error);
@@ -65,7 +77,10 @@ onMounted(async () => {
 
 <template>
   <div class="p-4">
-    <h3 class="text-center">Quiz Edit</h3>
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-0">
+      <h3>Update Quiz:</h3>
+      <button @click="deleteQuizHandler()" class="btn btn-danger">Delete Quiz</button>
+    </div>
     <div v-if="saved" class="alert alert-success mt-4" role="alert">
       Changes saved.
       <a @click="$router.push('/play/' + quiz.quiz_id)" style="cursor: pointer; color: #0056B3;">Test the quiz!</a>

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getQuizzes, deleteQuiz } from '../api/quiz';
+import { getQuizzes } from '../api/quiz';
 import { useRouter } from 'vue-router';1
 
 const quizzes = ref([]);
@@ -25,11 +25,6 @@ const createQuiz = () => {
 const updateQuiz = (quizId) => {
   router.push(`/update/${quizId}`);
 }
-
-const deleteQuizHandler = (quizId) => {
-  deleteQuiz(quizId);
-  window.location.reload();
-}
 </script>
 
 <template>
@@ -53,7 +48,6 @@ const deleteQuizHandler = (quizId) => {
             <td>
               <button @click="playQuiz(quiz.quiz_id)" class="btn btn-success mb-1 mr-1">Play</button>
               <button @click="updateQuiz(quiz.quiz_id)" class="btn btn-info mb-1 mr-1">Update</button>
-              <button @click="deleteQuizHandler(quiz.quiz_id)" class="btn btn-danger mb-1 mr-1">Delete</button>
             </td>
         </tr>
       </tbody>
