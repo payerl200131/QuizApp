@@ -77,7 +77,7 @@ onMounted(async () => {
 
 <template>
   <div class="p-4">
-    <div class="d-flex justify-content-between align-items-center mt-4 mb-0">
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
       <h3>Update Quiz:</h3>
       <button @click="deleteQuizHandler()" class="btn btn-danger">Delete Quiz</button>
     </div>
